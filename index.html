@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>What colour is it?</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="What colour is it?">
+
+    <meta property="og:title" content="What colour is it?">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:description" content="the time....... now in colour.">
+    <meta property="og:type" content="Website">
+    <meta property="og:site_name" content="ghoullier">
+    <meta property="og:url" content="http://ghoullier.github.com/whatcolourisit/">
+    <meta property="og:image" content="http://ghoullier.github.com/whatcolourisit/image.jpg">
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:800,400,300" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <main class="Color">
+      <h1 class="Color__Time"></h1>
+      <h2 class="Color__Code"></h2>
+    </main>
+    <style>
+      body {
+        transition: all 800ms;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        color: #FFF;
+        text-align: center;
+        font-family: "open sans", Arial, Calibri;
+        display: table;
+      }
+      .Color {
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+        display: table-cell;
+      }
+      .Color__Time {
+        font-size: 8em;
+        font-weight: 300;
+      }
+      .Color__Code {
+        font-size: 2em;
+        font-weight: 300;
+      }
+      @media (max-width: 36em) {
+        .Color__Time {
+          font-size: 3em;
+        }
+        .Color__Code {
+          font-size: 1.5em;
+        }
+      }
+    </style>
+    <script src="//momentjs.com/downloads/moment.min.js"></script>
+    <script>
+      (function main() {
+        var time = document.querySelector('.Color__Time');
+        var code = document.querySelector('.Color__Code');
+        var style = document.body.style;
+        (function tick() {
+          var now = moment();
+          time.innerText = now.format('HH : mm : ss');
+          style.backgroundColor = code.innerText = now.format('#HHmmss');
+          setTimeout(tick, 1000);
+        }(style.width));
+      }());
+    </script>
+  </body>
+</html>
