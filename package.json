@@ -26,6 +26,7 @@
   "homepage": "https://ghoullier.github.com/whatcolourisit",
   "devDependencies": {
     "gulp": "^3.8.10",
+    "gulp-htmlmin": "^0.2.0",
     "gulp-gh-pages": "^0.4.0"
   }
 }
