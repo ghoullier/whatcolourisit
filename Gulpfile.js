@@ -35,7 +35,7 @@ gulp.task('build', [], function() {
 gulp.task('deploy', [], function() {
   gulp
     .src([
-      './.build/fork.png',
+      './.build/*.png',
       './.build/index.html',
       './.build/manifest.appcache',
       './.build/script.js',
