@@ -1,14 +1,11 @@
 CACHE MANIFEST
 
-# Version: v1.0.0
+# Version: v2.0.0
 
 CACHE:
 
 ./index.html
-./script.js
 ./style.css
 ./fork.png
-
-http://momentjs.com/downloads/moment.min.js
 
 NETWORK: *

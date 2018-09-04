@@ -1,44 +1,39 @@
 'use strict';
 
-var gulp    = require('gulp');
-var ghPages = require('gulp-gh-pages');
-var usemin  = require('gulp-usemin');
-var uglify  = require('gulp-uglify');
-var html    = require('gulp-minify-html');
-var css     = require('gulp-minify-css');
-var rev     = require('gulp-rev');
+const gulp    = require('gulp');
+const ghPages = require('gulp-gh-pages');
+const html    = require('gulp-htmlmin');
+const css     = require('gulp-clean-css');
 
-var pkg     = require('./package');
+const pkg     = require('./package');
 
-gulp.task('build', [], function() {
-  gulp
+const buildAssets = () => gulp.src([
+    './src/*.appcache',
+    './src/*.png'
+  ])
+  .pipe(gulp.dest('./.build/'))
+  ;
+
+const buildHtml = () => gulp
     .src([
-      './src/*.html',
-      './src/*.css',
-      './src/*.js'
+      './src/*.html'
     ])
-    .pipe(usemin({
-      css: [css()],
-      html: [html()],
-      js: [uglify()]
-    }))
+    .pipe(html({ collapseWhitespace: true, minifyJS: true }))
     .pipe(gulp.dest('./.build/'))
   ;
-    gulp.src([
-      './src/*.appcache',
-      './src/*.png'
+const buildCss = () => gulp
+    .src([
+      './src/*.css'
     ])
+    .pipe(html({ collapseWhitespace: true }))
     .pipe(gulp.dest('./.build/'))
   ;
-});
 
-gulp.task('deploy', [], function() {
-  gulp
+const deploy = () => gulp
     .src([
       './.build/*.png',
       './.build/index.html',
       './.build/manifest.appcache',
-      './.build/script.js',
       './.build/style.css'
     ])
     // Publish on GitHub Pages
@@ -48,4 +43,10 @@ gulp.task('deploy', [], function() {
       cacheDir : __dirname + '/.publish/'
     }))
   ;
-});
+
+gulp.task('build:assets', buildAssets);
+gulp.task('build:css', buildCss);
+gulp.task('build:html', buildHtml);
+gulp.task('build', gulp.parallel('build:assets', 'build:css', 'build:html'));
+gulp.task('deploy', deploy);
+gulp.task('default', gulp.series('build', 'deploy'), (done) => done());
