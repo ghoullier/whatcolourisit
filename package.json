@@ -1,10 +1,10 @@
 {
   "name": "whatcolourisit",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Smaller clone of http://whatcolourisit.scn9a.org",
   "private": true,
+  "type": "module",
   "scripts": {
-    "predeploy": "npm install",
     "build": "gulp build",
     "deploy": "gulp"
   },
